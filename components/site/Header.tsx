@@ -191,14 +191,14 @@ export function Header({ namaDaerah, logo, telepon, email, today, social, live }
         {/* Bar utama */}
         <div className="border-b border-white/10 bg-primary-800 lg:border-b-2 lg:border-accent-500">
           <div className="container flex h-16 items-center gap-4 lg:h-20">
-            <Link href="/" aria-label="Beranda" className="min-w-0 shrink">
+            <Link href="/" aria-label="Beranda" className="min-w-0 shrink lg:shrink-0">
               <Logo namaDaerah={namaDaerah} logo={logo} light tagline={false} />
             </Link>
 
-            <nav className="ml-auto hidden items-center gap-0.5 lg:flex" aria-label="Menu utama">
+            <nav className="ml-auto hidden items-center lg:flex" aria-label="Menu utama">
               <Link
                 href="/"
-                className={cn("rounded-lg px-3 py-2 text-sm font-semibold transition hover:bg-white/10", pathname === "/" ? "text-accent-400" : "text-white/90 hover:text-white")}
+                className={cn("rounded-lg px-2.5 py-2 text-[13px] font-semibold transition hover:bg-white/10", pathname === "/" ? "text-accent-400" : "text-white/90 hover:text-white")}
               >
                 Beranda
               </Link>
@@ -209,12 +209,12 @@ export function Header({ namaDaerah, logo, telepon, email, today, social, live }
                   onClick={() => setMega(mega === g.label ? null : g.label)}
                   aria-expanded={mega === g.label}
                   className={cn(
-                    "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition hover:bg-white/10",
+                    "flex items-center gap-0.5 rounded-lg px-2 py-2 text-[13px] font-semibold transition hover:bg-white/10",
                     mega === g.label ? "bg-white/10 text-white" : groupActive(g) ? "text-accent-400" : "text-white/90 hover:text-white",
                   )}
                 >
                   {g.label}
-                  <ChevronDown className={cn("h-3.5 w-3.5 opacity-70 transition", mega === g.label && "rotate-180")} />
+                  <ChevronDown className={cn("h-3 w-3 opacity-70 transition", mega === g.label && "rotate-180")} />
                 </button>
               ))}
             </nav>
@@ -226,7 +226,7 @@ export function Header({ namaDaerah, logo, telepon, email, today, social, live }
               <Link
                 href="/tv"
                 className={cn(
-                  "hidden items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition sm:flex",
+                  "hidden items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition sm:flex lg:px-3",
                   live ? "bg-red-600 text-white hover:bg-red-700" : "bg-accent-500 text-primary-950 hover:bg-accent-400",
                 )}
               >

@@ -22,7 +22,7 @@ export function Logo({ namaDaerah, logo, light, compact, tagline = true }: { nam
           DPRD
           {!compact && tagline && <span className={cn("ml-2 hidden text-[10px] font-semibold uppercase tracking-[0.18em] xl:inline", light ? "text-accent-400" : "text-accent-600")}>Dewan Perwakilan Rakyat Daerah</span>}
         </span>
-        <span className={cn("block truncate text-[11px] font-semibold uppercase tracking-wider sm:text-xs", light ? "text-white/80" : "text-slate-600")}>{namaDaerah}</span>
+        <span className={cn("block truncate text-[11px] font-semibold uppercase tracking-wider sm:text-xs lg:text-sm", light ? "text-white/80" : "text-slate-600")}>{namaDaerah}</span>
       </span>
     </span>
   );
