@@ -3,39 +3,40 @@ import { hashPassword } from "./password";
 import { slugify } from "./utils";
 
 export const DEFAULT_SETTINGS: Settings = {
-  namaDaerah: "Kabupaten Sukamaju",
-  tagline: "Bersama Rakyat Membangun Daerah",
+  namaDaerah: "Kota Ternate",
+  tagline: "Bersama Rakyat Membangun Kota Ternate",
   logo: "",
   favicon: "",
   warnaPrimer: "#0b5ea8",
   warnaAksen: "#f2b705",
   periode: "2024–2029",
-  alamat: "Jl. Pahlawan No. 1, Kompleks Perkantoran Pemerintah Daerah",
-  telepon: "(0123) 456789",
-  whatsapp: "6281234567890",
-  email: "sekretariat@dprd.go.id",
-  jamLayanan: "Senin – Jumat, 08.00 – 16.00 WIB",
-  mapsEmbed: "https://www.google.com/maps?q=Monas+Jakarta&output=embed",
-  facebook: "https://facebook.com",
-  instagram: "https://instagram.com",
-  youtube: "https://youtube.com",
-  twitter: "https://x.com",
+  // Kontak resmi sengaja dikosongkan (tidak ditampilkan) sampai diisi Sekretariat DPRD lewat CMS
+  alamat: "Kota Ternate, Provinsi Maluku Utara",
+  telepon: "",
+  whatsapp: "",
+  email: "",
+  jamLayanan: "Senin – Jumat, 08.00 – 16.00 WIT",
+  mapsEmbed: "https://www.google.com/maps?q=DPRD+Kota+Ternate&output=embed",
+  facebook: "",
+  instagram: "",
+  youtube: "",
+  twitter: "",
   tiktok: "",
   sambutanJudul: "Sambutan Ketua DPRD",
   sambutanKetua:
     "Assalamu'alaikum warahmatullahi wabarakatuh, salam sejahtera bagi kita semua.\n\nPuji syukur kita panjatkan ke hadirat Tuhan Yang Maha Esa. Portal resmi ini kami hadirkan sebagai wujud komitmen DPRD untuk menjadi lembaga yang terbuka, transparan, dan dekat dengan masyarakat.\n\nMelalui portal ini, masyarakat dapat mengikuti agenda kegiatan dewan, menyaksikan siaran langsung rapat, mengakses produk hukum, serta menyampaikan aspirasi secara langsung kepada wakil rakyat. Mari bersama-sama kita wujudkan pembangunan daerah yang adil, maju, dan sejahtera.",
   sejarah:
-    "Dewan Perwakilan Rakyat Daerah (DPRD) merupakan lembaga perwakilan rakyat daerah yang berkedudukan sebagai unsur penyelenggara pemerintahan daerah.\n\nSejak dibentuk, DPRD telah melalui berbagai periode keanggotaan yang masing-masing memberikan kontribusi bagi pembangunan daerah. Seiring perkembangan sistem ketatanegaraan, kedudukan dan peran DPRD terus diperkuat melalui berbagai peraturan perundang-undangan, termasuk Undang-Undang Nomor 23 Tahun 2014 tentang Pemerintahan Daerah.\n\nHingga kini, DPRD terus berbenah untuk mewujudkan lembaga legislatif yang aspiratif, akuntabel, dan responsif terhadap kebutuhan masyarakat.",
+    "Dewan Perwakilan Rakyat Daerah (DPRD) Kota Ternate merupakan lembaga perwakilan rakyat daerah yang berkedudukan sebagai unsur penyelenggara pemerintahan daerah Kota Ternate, Provinsi Maluku Utara.\n\nTernate memiliki sejarah panjang sebagai pusat Kesultanan Ternate dan jalur rempah dunia. Dalam perjalanan pemerintahan modern, Ternate berstatus kota administratif sebelum ditetapkan sebagai daerah otonom (kotamadya) pada tahun 1999, sehingga memiliki DPRD sendiri sebagai wadah perwakilan masyarakat.\n\nSeiring perkembangan sistem ketatanegaraan, kedudukan dan peran DPRD terus diperkuat melalui berbagai peraturan perundang-undangan, termasuk Undang-Undang Nomor 23 Tahun 2014 tentang Pemerintahan Daerah. Hingga kini, DPRD Kota Ternate terus berbenah untuk mewujudkan lembaga legislatif yang aspiratif, akuntabel, dan responsif terhadap kebutuhan masyarakat.",
   visi: "Terwujudnya DPRD yang aspiratif, transparan, dan berintegritas dalam mewujudkan masyarakat yang sejahtera dan berkeadilan.",
   misi:
     "Meningkatkan kualitas pembentukan peraturan daerah yang berpihak kepada rakyat\nMengoptimalkan fungsi anggaran untuk kesejahteraan masyarakat\nMemperkuat fungsi pengawasan terhadap penyelenggaraan pemerintahan daerah\nMeningkatkan penyerapan dan tindak lanjut aspirasi masyarakat\nMewujudkan tata kelola kelembagaan yang modern dan terbuka",
   tugasFungsi:
     "## Fungsi DPRD\n- **Fungsi Pembentukan Perda** — membentuk peraturan daerah bersama kepala daerah.\n- **Fungsi Anggaran** — membahas dan memberikan persetujuan rancangan APBD.\n- **Fungsi Pengawasan** — mengawasi pelaksanaan perda dan APBD.\n\n## Tugas dan Wewenang\n1. Membentuk perda bersama kepala daerah.\n2. Membahas dan memberikan persetujuan rancangan perda mengenai APBD.\n3. Melaksanakan pengawasan terhadap pelaksanaan perda dan APBD.\n4. Memilih kepala daerah atau wakil kepala daerah dalam hal terjadi kekosongan jabatan.\n5. Meminta laporan keterangan pertanggungjawaban kepala daerah.\n6. Menyerap, menghimpun, dan menindaklanjuti aspirasi masyarakat.",
   footerTentang:
-    "Portal resmi Dewan Perwakilan Rakyat Daerah sebagai sarana informasi publik, transparansi kegiatan dewan, dan penyaluran aspirasi masyarakat.",
+    "Portal resmi Dewan Perwakilan Rakyat Daerah Kota Ternate sebagai sarana informasi publik, transparansi kegiatan dewan, dan penyaluran aspirasi masyarakat.",
   tautanTerkait:
-    "Sekretariat DPRD | /profil\nJDIH — Produk Hukum | /dokumen\nPPID — Informasi Publik | /kontak\nPemerintah Daerah | https://www.kemendagri.go.id\nDPR RI | https://www.dpr.go.id\nLPSE | https://lpse.lkpp.go.id",
-  statAktif: true,
+    "Pemerintah Kota Ternate | https://ternatekota.go.id\nPemerintah Provinsi Maluku Utara | https://malutprov.go.id\nBPS Kota Ternate | https://ternatekota.bps.go.id\nDPR RI | https://www.dpr.go.id\nJDIH — Produk Hukum | /dokumen\nPPID — Informasi Publik | /kontak",
+  statAktif: false,
   statWilayah: "Kota Ternate",
   statPenduduk: "216.175",
   statLuas: "111,39",
@@ -43,17 +44,17 @@ export const DEFAULT_SETTINGS: Settings = {
   statKelurahan: "77",
   statSumber: "BPS Kota Ternate (Kota Ternate Dalam Angka 2026, data 2025) & Kemendagri",
   cuacaAktif: true,
-  cuacaLokasi: "Jakarta",
-  cuacaLat: "-6.2088",
-  cuacaLon: "106.8456",
+  cuacaLokasi: "Ternate",
+  cuacaLat: "0.7893",
+  cuacaLon: "127.3770",
   tvLiveAktif: true,
-  tvJudul: "Siaran Langsung Rapat Paripurna DPRD",
+  tvJudul: "Siaran Langsung Rapat Paripurna DPRD Kota Ternate",
   tvUrl: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
   tvPoster: "/images/hero/paripurna.jpg",
   tvDeskripsi:
     "Saksikan secara langsung jalannya rapat-rapat DPRD. Siaran ini merupakan wujud keterbukaan informasi kepada masyarakat.",
   tvJadwal:
-    "Senin | 09.00 WIB | Rapat Paripurna\nRabu | 10.00 WIB | Rapat Dengar Pendapat Komisi\nJumat | 14.00 WIB | Dialog Wakil Rakyat\nSabtu | 19.00 WIB | Pekan Legislasi (Siaran Ulang)",
+    "Senin | 09.00 WIT | Rapat Paripurna\nRabu | 10.00 WIT | Rapat Dengar Pendapat Komisi\nJumat | 14.00 WIT | Dialog Wakil Rakyat\nSabtu | 19.00 WIT | Pekan Legislasi (Siaran Ulang)",
 };
 
 const img = (seed: string, w = 1200, h = 800) => `https://picsum.photos/seed/${seed}/${w}/${h}`;
@@ -140,7 +141,7 @@ export function createSeed(): DB {
   const order = [0, 7, 13, 19, 1, 8, 14, 20, 2, 9, 15, 21, 3, 10, 16, 22, 4, 11, 17, 23, 5, 12, 18, 24, 6, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34];
   const jabatanPimpinan = ["Ketua DPRD", "Wakil Ketua DPRD", "Wakil Ketua DPRD", "Wakil Ketua DPRD"];
   const pendidikan = ["S1 Ilmu Pemerintahan", "S2 Manajemen", "S1 Hukum", "S1 Ekonomi", "S1 Teknik Sipil", "S2 Administrasi Publik", "S1 Pendidikan"];
-  const kota = ["Sukamaju", "Bandung", "Semarang", "Surabaya", "Yogyakarta", "Makassar", "Medan"];
+  const kota = ["Ternate", "Tidore", "Sofifi", "Tobelo", "Jailolo", "Manado", "Ambon"];
 
   let komisiTurn = 0;
   const anggota: Anggota[] = order.map((nameIdx, i) => {
@@ -159,7 +160,7 @@ export function createSeed(): DB {
       tempatLahir: kota[i % kota.length],
       tanggalLahir: `${1965 + (i % 25)}-${String((i % 12) + 1).padStart(2, "0")}-${String((i % 27) + 1).padStart(2, "0")}`,
       pendidikan: pendidikan[i % pendidikan.length],
-      email: `${slugify(nama.split(",")[0]).replace(/-/g, ".")}@dprd.go.id`,
+      email: "",
       bio: `${nama} merupakan anggota DPRD periode ${DEFAULT_SETTINGS.periode} yang terpilih dari Dapil ${(i % 5) + 1}. Aktif memperjuangkan aspirasi masyarakat, khususnya di bidang pembangunan, pendidikan, dan pemberdayaan ekonomi warga.`,
       urutan: i + 1,
     };
@@ -185,17 +186,17 @@ export function createSeed(): DB {
   });
 
   // Foto hero: Wikimedia Commons, lisensi Public Domain
+  // Foto hero: Wikimedia Commons. Lisensi CC mewajibkan atribusi → kolom "kredit" tampil di pojok hero.
   const slides: Slide[] = [
-    ["Bersama Rakyat Membangun Daerah", "Mewujudkan DPRD yang aspiratif, transparan, dan berintegritas untuk kesejahteraan masyarakat.", "Sampaikan Aspirasi", "/aspirasi", "gedung-dprd-ntb"],
-    ["Saksikan Siaran Langsung Rapat Paripurna", "Ikuti jalannya rapat-rapat dewan secara real-time melalui TV DPRD.", "Tonton TV DPRD", "/tv", "paripurna"],
-    ["Transparansi Produk Hukum Daerah", "Akses peraturan daerah, keputusan DPRD, dan dokumen publik lainnya dengan mudah.", "Lihat Produk Hukum", "/dokumen", "gedung-dpr"],
-  ].map(([judul, subjudul, tombolTeks, tombolLink, foto], i) => ({
+    ["Panorama Kota Ternate", "Kota Ternate dengan latar Gunung Gamalama — bersama rakyat membangun Kota Ternate.", "ternate-gamalama", "Foto: Fabio Achilli / Wikimedia Commons (CC BY 2.0)"],
+    ["Rapat Paripurna", "Saksikan siaran langsung rapat-rapat dewan melalui TV DPRD.", "paripurna", ""],
+    ["Gunung Gamalama", "Transparansi produk hukum dan informasi publik DPRD Kota Ternate.", "gunung-gamalama", "Foto: Marwan Mohamad / Wikimedia Commons (CC BY-SA 4.0)"],
+  ].map(([judul, subjudul, foto, kredit], i) => ({
     ...base(`s${i + 1}`),
     judul,
     subjudul,
     gambar: `/images/hero/${foto}.jpg`,
-    tombolTeks,
-    tombolLink,
+    kredit,
     urutan: i + 1,
     aktif: true,
   }));
@@ -227,7 +228,7 @@ export function createSeed(): DB {
   const agendaDef: [string, string, number, string, string, string, string, boolean][] = [
     ["Rapat Paripurna Penyampaian Nota Keuangan Raperda APBD", "Rapat Paripurna", 2, "09.00", "12.00", "Ruang Rapat Paripurna", "", true],
     ["Rapat Dengar Pendapat dengan Dinas Pendidikan", "Rapat Dengar Pendapat", 3, "10.00", "13.00", "Ruang Rapat Komisi IV", "k4", false],
-    ["Kunjungan Kerja Pengawasan Proyek Drainase Kota", "Kunjungan Kerja", 5, "08.00", "15.00", "Kecamatan Sukamaju Utara", "k3", false],
+    ["Kunjungan Kerja Pengawasan Proyek Drainase Kota", "Kunjungan Kerja", 5, "08.00", "15.00", "Kecamatan Ternate Utara", "k3", false],
     ["Rapat Badan Anggaran Pembahasan KUA-PPAS", "Rapat Badan", 7, "13.00", "17.00", "Ruang Rapat Badan Anggaran", "b2", true],
     ["Rapat Kerja Komisi II dengan BUMD", "Rapat Kerja", 9, "09.30", "12.00", "Ruang Rapat Komisi II", "k2", false],
     ["Reses Masa Sidang II Tahun 2026", "Reses", 14, "08.00", "16.00", "Daerah Pemilihan Masing-masing", "", false],
@@ -298,7 +299,7 @@ export function createSeed(): DB {
 
   const aspirasi: Aspirasi[] = [
     ["Perbaikan jalan rusak di Desa Mekarsari", "Infrastruktur", "k3", "Ditindaklanjuti", "Aspirasi telah diteruskan kepada Dinas PUPR dan masuk dalam rencana perbaikan triwulan berikutnya. Komisi III akan memantau pelaksanaannya.", true, false],
-    ["Kekurangan guru di SD Negeri Sukamaju 3", "Pendidikan", "k4", "Selesai", "Komisi IV telah melakukan rapat dengan Dinas Pendidikan. Penambahan dua guru telah direalisasikan pada semester ini.", true, false],
+    ["Kekurangan guru di salah satu SD Negeri di Ternate Selatan", "Pendidikan", "k4", "Selesai", "Komisi IV telah melakukan rapat dengan Dinas Pendidikan. Penambahan dua guru telah direalisasikan pada semester ini.", true, false],
     ["Penerangan jalan umum di lingkungan RW 05", "Infrastruktur", "k3", "Diproses", "", false, true],
     ["Bantuan modal usaha untuk UMKM", "Ekonomi", "k2", "Baru", "", false, false],
   ].map(([judul, kategori, komisiId, status, tanggapan, tampilPublik, anonim], i) => ({

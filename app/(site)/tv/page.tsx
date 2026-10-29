@@ -4,7 +4,7 @@ import { findById, getSettings, readDB } from "@/lib/db";
 import { getAgendaMendatang, getVideos } from "@/lib/queries";
 import { LivePlayer } from "@/components/site/LivePlayer";
 import { VideoCard } from "@/components/site/Cards";
-import { formatDate, lines, videoThumb } from "@/lib/utils";
+import { formatDate, lines, videoThumb, ZONA_WAKTU } from "@/lib/utils";
 
 export const metadata = { title: "TV DPRD — Siaran Langsung" };
 
@@ -105,7 +105,7 @@ export default async function TvPage({ searchParams }: { searchParams: Promise<{
                       <li key={a.id}>
                         <Link href={`/agenda/${a.id}`} className="group block">
                           <span className="text-xs text-accent-300">
-                            {formatDate(a.tanggal, { weekday: "long", day: "numeric", month: "short" })} · {a.waktuMulai} WIB
+                            {formatDate(a.tanggal, { weekday: "long", day: "numeric", month: "short" })} · {a.waktuMulai} {ZONA_WAKTU}
                           </span>
                           <span className="block text-sm font-semibold group-hover:text-accent-300">{a.judul}</span>
                         </Link>

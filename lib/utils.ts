@@ -17,9 +17,13 @@ export function uid() {
   return crypto.randomUUID();
 }
 
+/** Zona waktu daerah. Kota Ternate (Maluku Utara) memakai WIT = UTC+9. */
+export const TIMEZONE = "Asia/Jayapura";
+export const ZONA_WAKTU = "WIT";
+
 const DATE_ONLY = /^\d{4}-\d{2}-\d{2}$/;
 
-/** Tanggal "YYYY-MM-DD" diformat di UTC agar tidak bergeser hari; timestamp di zona WIB. */
+/** Tanggal "YYYY-MM-DD" diformat di UTC agar tidak bergeser hari; timestamp di zona waktu daerah. */
 export function formatDate(
   value: string,
   opts: Intl.DateTimeFormatOptions = { day: "numeric", month: "long", year: "numeric" },
@@ -27,7 +31,7 @@ export function formatDate(
   if (!value) return "";
   const d = new Date(value);
   if (isNaN(d.getTime())) return value;
-  return new Intl.DateTimeFormat("id-ID", { ...opts, timeZone: DATE_ONLY.test(value) ? "UTC" : "Asia/Jakarta" }).format(d);
+  return new Intl.DateTimeFormat("id-ID", { ...opts, timeZone: DATE_ONLY.test(value) ? "UTC" : TIMEZONE }).format(d);
 }
 
 export function formatDateTime(value: string) {
@@ -43,9 +47,9 @@ export function dateParts(value: string) {
   };
 }
 
-/** Tanggal hari ini (WIB) dalam format YYYY-MM-DD. */
+/** Tanggal hari ini (zona waktu daerah) dalam format YYYY-MM-DD. */
 export function todayISO() {
-  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Jakarta" }).format(new Date());
+  return new Intl.DateTimeFormat("en-CA", { timeZone: TIMEZONE }).format(new Date());
 }
 
 export function youtubeId(url: string): string | null {

@@ -53,6 +53,7 @@ export const RESOURCES: Resource[] = [
     fields: [
       { name: "judul", label: "Nama Slide", type: "text", required: true, full: true, help: "Hanya sebagai penanda di CMS (tidak tampil di situs)" },
       { name: "gambar", label: "Gambar Latar (disarankan 1920×1080)", type: "image", full: true },
+      { name: "kredit", label: "Kredit Foto", type: "text", full: true, help: "Wajib diisi untuk foto berlisensi Creative Commons, mis. \"Foto: Nama / Wikimedia Commons (CC BY 2.0)\". Kosongkan untuk foto milik sendiri." },
       { name: "subjudul", label: "Keterangan", type: "textarea", full: true, help: "Kalimat singkat di bawah kotak pencarian hero (tampil di tablet & desktop)" },
       { name: "urutan", label: "Urutan", type: "number" },
       { name: "aktif", label: "Tampilkan", type: "checkbox" },
@@ -265,7 +266,7 @@ export function getResource(key: string) {
 }
 
 export const SETTINGS_FIELDS: Field[] = [
-  { name: "namaDaerah", label: "Nama Daerah", type: "text", required: true, section: "Identitas", help: "Contoh: Kabupaten Sukamaju, Kota Sukamaju, atau Provinsi Sukamaju" },
+  { name: "namaDaerah", label: "Nama Daerah", type: "text", required: true, section: "Identitas", help: "Contoh: Kota Ternate" },
   { name: "tagline", label: "Tagline / Slogan", type: "text", section: "Identitas" },
   { name: "periode", label: "Periode Keanggotaan", type: "text", section: "Identitas" },
   { name: "logo", label: "Logo Daerah", type: "image", section: "Identitas", help: "PNG transparan disarankan" },
@@ -299,7 +300,7 @@ export const SETTINGS_FIELDS: Field[] = [
   { name: "statKelurahan", label: "Jumlah Kelurahan", type: "text", section: "Data Wilayah", placeholder: "77" },
   { name: "statSumber", label: "Sumber Data", type: "text", section: "Data Wilayah", full: true, help: "Ditampilkan sebagai keterangan kecil di bawah angka" },
   { name: "cuacaAktif", label: "Tampilkan widget cuaca & kualitas udara di hero", type: "checkbox", section: "Widget Cuaca", full: true },
-  { name: "cuacaLokasi", label: "Nama Lokasi", type: "text", section: "Widget Cuaca", placeholder: "Contoh: Sukamaju" },
+  { name: "cuacaLokasi", label: "Nama Lokasi", type: "text", section: "Widget Cuaca", placeholder: "Contoh: Ternate" },
   { name: "cuacaLat", label: "Latitude", type: "text", section: "Widget Cuaca", placeholder: "-6.2088" },
   { name: "cuacaLon", label: "Longitude", type: "text", section: "Widget Cuaca", placeholder: "106.8456", help: "Klik kanan lokasi di Google Maps untuk menyalin koordinat" },
 ];

@@ -6,7 +6,7 @@ import { getAgendaMendatang, getLookups } from "@/lib/queries";
 import { PageHeader } from "@/components/site/PageHeader";
 import { Prose } from "@/components/site/Prose";
 import { AgendaCard } from "@/components/site/Cards";
-import { formatDate, todayISO } from "@/lib/utils";
+import { formatDate, todayISO, ZONA_WAKTU } from "@/lib/utils";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -24,7 +24,7 @@ export default async function AgendaDetail({ params }: Props) {
 
   const info = [
     { icon: CalendarDays, label: "Tanggal", value: formatDate(a.tanggal, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) },
-    { icon: Clock, label: "Waktu", value: `${a.waktuMulai}${a.waktuSelesai ? ` – ${a.waktuSelesai}` : ""} WIB` },
+    { icon: Clock, label: "Waktu", value: `${a.waktuMulai}${a.waktuSelesai ? ` – ${a.waktuSelesai}` : ""} ${ZONA_WAKTU}` },
     { icon: MapPin, label: "Lokasi", value: a.lokasi },
     { icon: Tag, label: "Jenis / Status", value: `${a.jenis} · ${a.status}` },
     { icon: Landmark, label: "Alat Kelengkapan", value: k?.nama },

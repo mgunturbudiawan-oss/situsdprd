@@ -1,6 +1,8 @@
-# Portal DPRD — Next.js + Tailwind CSS
+# Portal DPRD Kota Ternate — Next.js + Tailwind CSS
 
-Situs resmi DPRD lengkap dengan CMS. Nama daerah, logo, warna tema, dan seluruh konten diatur dari halaman admin, jadi satu kode ini bisa dipakai untuk DPRD kabupaten, kota, atau provinsi mana pun.
+Situs DPRD Kota Ternate lengkap dengan CMS. Nama daerah, logo, warna tema, dan seluruh konten diatur dari halaman admin, jadi kode yang sama tetap bisa dipakai untuk DPRD daerah lain.
+
+> **Sebelum dipublikasikan:** data anggota dewan, fraksi, komisi, berita, agenda, dan dokumen bawaan adalah **data contoh fiktif**. Ganti semuanya dengan data resmi DPRD Kota Ternate lewat CMS. Kontak resmi (alamat lengkap, telepon, email, WhatsApp, media sosial) sengaja dikosongkan dan perlu diisi di *Pengaturan Situs*.
 
 ## Menjalankan di komputer sendiri
 
@@ -105,7 +107,13 @@ storage/             data lokal (diabaikan git)
 - **Penyimpanan data.** Setiap kunci (`settings`, `berita`, `agenda`, dan seterusnya) disimpan sebagai satu dokumen JSON. Di Postgres bentuknya satu baris di tabel `dprd_store`. Perubahan berjalan dalam transaksi dengan penguncian baris, jadi penyimpanan bersamaan tidak saling menimpa. Model ini cocok untuk skala situs DPRD (ratusan hingga ribuan konten).
 - **Backup.** Di lokal cukup salin folder `storage/`. Di Postgres gunakan fitur backup penyedia (misalnya *branching/restore* di Neon).
 - `npm run reset-data` menghapus `storage/db.json` lokal. Data contoh dibuat ulang saat situs dibuka lagi.
-- **Foto hero** ada di `public/images/hero/`. Sumbernya Wikimedia Commons, semuanya berlisensi **Public Domain**: *Sidang Paripurna DPR ke-9 2015*, *MPRDPRBuilding*, dan *Gedung DPRD NTB*. Sebaiknya ganti dengan foto gedung dan kegiatan DPRD sendiri lewat menu Hero Slider.
+- **Foto hero** ada di `public/images/hero/`, bersumber dari Wikimedia Commons:
+  - `ternate-gamalama.jpg`: *Pulau Ternate and Gamalama Volcano from the North-west Coast of Pulau Tidore*, oleh Fabio Achilli, **CC BY 2.0**
+  - `gunung-gamalama.jpg`: *Gunung Gamalama (1)*, oleh Marwan Mohamad, **CC BY-SA 4.0**
+  - `paripurna.jpg`: *Sidang Paripurna DPR ke-9 2015*, **Public Domain**
+
+  Lisensi CC mewajibkan atribusi. Karena itu kredit foto tampil di pojok hero (kolom *Kredit Foto* pada menu Hero Slider). Sebaiknya ganti dengan foto gedung dan kegiatan DPRD Kota Ternate sendiri.
 - Gambar berita dan galeri contoh memakai picsum.photos, dan video contoh memakai stream uji publik (Mux/Google). Ganti semuanya dari CMS.
 - **Widget cuaca & kualitas udara** mengambil data dari [Open-Meteo](https://open-meteo.com), yang gratis dan tanpa API key, dengan cache 10 menit. Atur lokasi di *Pengaturan Situs → Widget Cuaca*. Indeks udara memakai skala AQI (US) dengan label kategori seperti ISPU.
+- **Zona waktu** situs adalah **WIT (UTC+9)**, sesuai Kota Ternate. Konstanta `TIMEZONE` dan `ZONA_WAKTU` ada di `lib/utils.ts`.
 - **Data wilayah** (penduduk, luas, kecamatan, kelurahan) diatur di *Pengaturan Situs → Data Wilayah*. Periksa kembali angkanya dengan data resmi BPS/Pemkot sebelum dipublikasikan.

@@ -8,7 +8,7 @@ import { RegionStats } from "@/components/site/RegionStats";
 import { LivePlayer } from "@/components/site/LivePlayer";
 import { Avatar, FraksiBadge } from "@/components/site/Avatar";
 import { SectionTitle } from "@/components/site/Section";
-import { cn, dateParts, formatDate, todayISO, videoThumb } from "@/lib/utils";
+import { cn, dateParts, formatDate, todayISO, videoThumb, ZONA_WAKTU } from "@/lib/utils";
 import type { Berita } from "@/lib/types";
 
 const RAPAT = ["Rapat Paripurna", "Rapat Komisi", "Rapat Badan", "Rapat Kerja", "Rapat Dengar Pendapat"];
@@ -151,7 +151,7 @@ export default async function HomePage() {
                     {agendaHariIni.map((a) => (
                       <li key={a.id} className="border-l-4 border-accent-500 pl-3">
                         <Link href={`/agenda/${a.id}`} className="block text-sm font-semibold leading-snug text-slate-900 hover:text-primary-700">{a.judul}</Link>
-                        <span className="text-xs text-slate-500">{a.waktuMulai} WIB · {a.lokasi}</span>
+                        <span className="text-xs text-slate-500">{a.waktuMulai} {ZONA_WAKTU} · {a.lokasi}</span>
                       </li>
                     ))}
                   </ul>
@@ -174,7 +174,7 @@ export default async function HomePage() {
                               <span className="min-w-0">
                                 <span className="line-clamp-2 text-sm font-medium leading-snug text-slate-800 group-hover:text-primary-700">{a.judul}</span>
                                 <span className="mt-0.5 flex items-center gap-1 text-xs text-slate-500">
-                                  <Clock className="h-3 w-3" /> {a.waktuMulai} WIB · {a.jenis}
+                                  <Clock className="h-3 w-3" /> {a.waktuMulai} {ZONA_WAKTU} · {a.jenis}
                                 </span>
                               </span>
                             </Link>

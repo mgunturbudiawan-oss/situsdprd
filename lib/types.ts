@@ -54,8 +54,7 @@ export interface Slide extends BaseItem {
   judul: string;
   subjudul: string;
   gambar: string;
-  tombolTeks: string;
-  tombolLink: string;
+  kredit: string;
   urutan: number;
   aktif: boolean;
 }

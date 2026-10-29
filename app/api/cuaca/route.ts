@@ -1,4 +1,5 @@
 import { getSettings } from "@/lib/db";
+import { TIMEZONE } from "@/lib/utils";
 
 // Data dari Open-Meteo (gratis, tanpa API key). Disimpan di memori 10 menit per koordinat.
 const TTL = 10 * 60 * 1000;
@@ -29,7 +30,7 @@ export async function GET() {
   const hit = cache.get(key);
   if (hit && Date.now() - hit.at < TTL) return Response.json({ ...(hit.data as CuacaResponse), lokasi: s.cuacaLokasi });
 
-  const q = `latitude=${lat}&longitude=${lon}&timezone=Asia%2FJakarta`;
+  const q = `latitude=${lat}&longitude=${lon}&timezone=${encodeURIComponent(TIMEZONE)}`;
   const [w, a] = await Promise.allSettled([
     getJson(`https://api.open-meteo.com/v1/forecast?${q}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,is_day`),
     getJson(`https://air-quality-api.open-meteo.com/v1/air-quality?${q}&current=us_aqi,pm2_5,pm10`),

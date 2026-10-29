@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Calendar, Film, MessageSquareText, Newspaper, Plus, Radio, Users } from "lucide-react";
 import { readDB } from "@/lib/db";
 import { getAgendaMendatang } from "@/lib/queries";
-import { formatDate, formatDateTime } from "@/lib/utils";
+import { formatDate, formatDateTime, ZONA_WAKTU } from "@/lib/utils";
 import { Flash, PageTitle } from "@/components/admin/PageTitle";
 import { StatusBadge } from "@/components/admin/StatusBadge";
 import { toggleLive } from "../actions";
@@ -97,7 +97,7 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
                 <Link key={a.id} href={`/admin/agenda/${a.id}`} className="block px-5 py-3 hover:bg-slate-50">
                   <p className="text-sm font-medium text-slate-900">{a.judul}</p>
                   <p className="text-xs text-slate-500">
-                    {formatDate(a.tanggal)} · {a.waktuMulai} WIB
+                    {formatDate(a.tanggal)} · {a.waktuMulai} {ZONA_WAKTU}
                   </p>
                 </Link>
               ))}

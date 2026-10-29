@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Calendar, Clock, MapPin, Play, Radio } from "lucide-react";
 import type { Agenda, Anggota, Berita, Fraksi, Video } from "@/lib/types";
-import { cn, dateParts, formatDate, videoThumb } from "@/lib/utils";
+import { cn, dateParts, formatDate, videoThumb, ZONA_WAKTU } from "@/lib/utils";
 import { Avatar, FraksiBadge } from "./Avatar";
 
 export function NewsCard({ b, large }: { b: Berita; large?: boolean }) {
@@ -69,7 +69,7 @@ export function AgendaCard({ a, komisi }: { a: Agenda; komisi?: string }) {
         <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500">
           <span className="flex items-center gap-1">
             <Clock className="h-3.5 w-3.5" /> {d.weekday}, {a.waktuMulai}
-            {a.waktuSelesai && ` – ${a.waktuSelesai}`} WIB
+            {a.waktuSelesai && ` – ${a.waktuSelesai}`} {ZONA_WAKTU}
           </span>
           {a.lokasi && (
             <span className="flex items-center gap-1">

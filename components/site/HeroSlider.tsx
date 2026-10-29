@@ -10,8 +10,7 @@ interface HeroSlide {
   judul: string;
   subjudul: string;
   gambar: string;
-  tombolTeks: string;
-  tombolLink: string;
+  kredit?: string;
 }
 
 export function HeroSlider({
@@ -68,7 +67,7 @@ export function HeroSlider({
   }, [index]);
 
   if (!count) {
-    slides = [{ id: "x", judul: `Selamat Datang di Portal DPRD ${namaDaerah}`, subjudul: "", gambar: "", tombolTeks: "Sampaikan Aspirasi", tombolLink: "/aspirasi" }];
+    slides = [{ id: "x", judul: `Selamat Datang di Portal DPRD ${namaDaerah}`, subjudul: "", gambar: "" }];
   }
 
   return (
@@ -141,6 +140,13 @@ export function HeroSlider({
           {slides[index]?.subjudul && <p className="mx-auto mt-5 hidden max-w-xl text-sm text-white/75 drop-shadow sm:block md:text-base">{slides[index].subjudul}</p>}
         </div>
       </div>
+
+      {/* Kredit foto (wajib untuk foto berlisensi Creative Commons) */}
+      {slides[index]?.kredit && (
+        <p className="pointer-events-none absolute bottom-1.5 right-3 z-10 max-w-[70%] truncate text-right text-[10px] text-white/55 drop-shadow md:bottom-3 md:right-6 md:text-[11px]">
+          {slides[index].kredit}
+        </p>
+      )}
 
       {count > 1 && (
         <>
