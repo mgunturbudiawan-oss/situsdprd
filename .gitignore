@@ -1,0 +1,16 @@
+# Dependensi & hasil build
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+
+# Data lokal (berisi hash password admin & isi CMS) — jangan di-commit
+storage
+
+# Rahasia
+.env
+.env*.local
+
+# Vercel
+.vercel

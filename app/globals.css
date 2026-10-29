@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 8rem; -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-white text-slate-800 antialiased; }
+  ::selection { @apply bg-primary-600 text-white; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60; }
+  .btn-primary { @apply btn bg-primary-700 text-white hover:bg-primary-800 focus-visible:ring-primary-500; }
+  .btn-accent { @apply btn bg-accent-500 text-primary-950 hover:bg-accent-400 focus-visible:ring-accent-400; }
+  .btn-outline { @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-50; }
+  .btn-ghost-light { @apply btn border border-white/40 text-white hover:bg-white/10; }
+  .btn-danger { @apply btn bg-red-600 text-white hover:bg-red-700; }
+  .btn-sm { @apply px-3 py-1.5 text-xs; }
+
+  .input { @apply block w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-base text-slate-800 shadow-sm sm:text-sm placeholder:text-slate-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20; }
+  .label { @apply mb-1.5 block text-sm font-medium text-slate-700; }
+  .card { @apply rounded-2xl border border-slate-200 bg-white shadow-sm; }
+  .badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold; }
+
+  .section { @apply py-16 md:py-24; }
+  .eyebrow { @apply mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-primary-700; }
+  .eyebrow::before { content: ""; @apply h-0.5 w-8 bg-accent-500; }
+  .heading { @apply font-display text-3xl font-bold tracking-tight text-slate-900 md:text-4xl; }
+
+  .pattern-dots { background-image: radial-gradient(rgb(255 255 255 / 0.12) 1px, transparent 1px); background-size: 22px 22px; }
+
+  /* Motif batik kawung: untuk latar gelap (garis putih) dan latar terang (garis gelap tipis) */
+  .pattern-kawung {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.07)' stroke-width='1.2'%3E%3Cellipse cx='28' cy='14' rx='7' ry='12'/%3E%3Cellipse cx='28' cy='42' rx='7' ry='12'/%3E%3Cellipse cx='14' cy='28' rx='12' ry='7'/%3E%3Cellipse cx='42' cy='28' rx='12' ry='7'/%3E%3Ccircle cx='28' cy='28' r='2.5'/%3E%3Ccircle cx='0' cy='0' r='3'/%3E%3Ccircle cx='56' cy='0' r='3'/%3E%3Ccircle cx='0' cy='56' r='3'/%3E%3Ccircle cx='56' cy='56' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 56px 56px;
+  }
+  .pattern-kawung-light {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='rgba(15,23,42,0.05)' stroke-width='1.2'%3E%3Cellipse cx='28' cy='14' rx='7' ry='12'/%3E%3Cellipse cx='28' cy='42' rx='7' ry='12'/%3E%3Cellipse cx='14' cy='28' rx='12' ry='7'/%3E%3Cellipse cx='42' cy='28' rx='12' ry='7'/%3E%3Ccircle cx='28' cy='28' r='2.5'/%3E%3Ccircle cx='0' cy='0' r='3'/%3E%3Ccircle cx='56' cy='0' r='3'/%3E%3Ccircle cx='0' cy='56' r='3'/%3E%3Ccircle cx='56' cy='56' r='3'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 56px 56px;
+  }
+}
+
+/* Skeleton shimmer: dipasang sebagai background, sehingga gambar yang sudah termuat otomatis menutupinya */
+.skeleton {
+  background-color: rgb(226 232 240);
+  background-image: linear-gradient(100deg, rgb(226 232 240) 30%, rgb(241 245 249) 50%, rgb(226 232 240) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+.skeleton-dark {
+  background-color: rgb(var(--primary-900));
+  background-image: linear-gradient(100deg, rgb(var(--primary-950)) 30%, rgb(var(--primary-800)) 50%, rgb(var(--primary-950)) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+.skeleton-light {
+  background-image: linear-gradient(100deg, rgb(255 255 255 / 0.08) 30%, rgb(255 255 255 / 0.2) 50%, rgb(255 255 255 / 0.08) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton, .skeleton-dark, .skeleton-light { animation: none; }
+}
+
+/* Scrollbar tipis untuk daftar yang bisa di-scroll (berita & agenda beranda, hanya desktop) */
+@media (min-width: 1024px) {
+  .thin-scroll { scrollbar-width: thin; scrollbar-color: rgb(var(--primary-300)) transparent; overscroll-behavior: contain; }
+  .thin-scroll::-webkit-scrollbar { width: 6px; }
+  .thin-scroll::-webkit-scrollbar-thumb { background: rgb(var(--primary-300)); border-radius: 9999px; }
+  .thin-scroll::-webkit-scrollbar-track { background: transparent; }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Konten rich text (editor CMS & tampilan publik) */
+.rte-content { min-height: 320px; }
+.rte-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: rgb(148 163 184);
+}
+.rte-content img.ProseMirror-selectednode { outline: 3px solid rgb(var(--primary-500)); border-radius: 0.75rem; }
+.rte-content .selectedCell { background: rgb(var(--primary-50)); }
+.rte-content a { cursor: text; }
+.rte-content, .prose-content { overflow-wrap: anywhere; }
+.rte-content mark, .prose-content mark { background: rgb(var(--accent-200)); color: inherit; padding: 0 0.15em; border-radius: 0.2em; }
+.rte-content table, .prose-content table { display: block; overflow-x: auto; border-collapse: collapse; width: 100%; }
+.rte-content th, .rte-content td, .prose-content th, .prose-content td { border: 1px solid rgb(226 232 240); padding: 0.5rem 0.75rem; vertical-align: top; min-width: 4rem; }
+.rte-content th, .prose-content th { background: rgb(var(--primary-50)); font-weight: 700; text-align: left; }
+.rte-content th p, .rte-content td p, .prose-content th p, .prose-content td p { margin: 0; }
+.rte-content div[data-youtube-video], .prose-content div[data-youtube-video] { margin: 1.5em 0; }
+.rte-content iframe, .prose-content iframe { width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; border-radius: 0.75rem; }
+.rte-content img, .prose-content img { max-width: 100%; height: auto; }

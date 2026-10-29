@@ -1,0 +1,53 @@
+{
+  "name": "dprd-portal",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "db:import": "node --env-file-if-exists=.env.local --env-file-if-exists=.env scripts/db-import.mjs",
+    "reset-data": "node -e \"require('fs').rmSync('storage/db.json',{force:true});console.log('Data direset, seed akan dibuat ulang saat situs diakses.')\""
+  },
+  "dependencies": {
+    "@tiptap/extension-highlight": "^2.27.3",
+    "@tiptap/extension-image": "^2.27.3",
+    "@tiptap/extension-link": "^2.27.3",
+    "@tiptap/extension-placeholder": "^2.27.3",
+    "@tiptap/extension-subscript": "^2.27.3",
+    "@tiptap/extension-superscript": "^2.27.3",
+    "@tiptap/extension-table": "^2.27.3",
+    "@tiptap/extension-table-cell": "^2.27.3",
+    "@tiptap/extension-table-header": "^2.27.3",
+    "@tiptap/extension-table-row": "^2.27.3",
+    "@tiptap/extension-text-align": "^2.27.3",
+    "@tiptap/extension-underline": "^2.27.3",
+    "@tiptap/extension-youtube": "^2.27.3",
+    "@tiptap/pm": "^2.27.3",
+    "@tiptap/react": "^2.27.3",
+    "@tiptap/starter-kit": "^2.27.3",
+    "@vercel/blob": "^2.8.2",
+    "hls.js": "^1.5.18",
+    "lucide-react": "^0.469.0",
+    "next": "^15.5.9",
+    "postgres": "^3.4.9",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sanitize-html": "^2.18.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@types/sanitize-html": "^2.16.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  }
+}
