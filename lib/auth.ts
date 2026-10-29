@@ -8,8 +8,13 @@ const COOKIE = "dprd_session";
 const MAX_AGE = 60 * 60 * 12; // 12 jam
 const DEV_SECRET = "dev-secret-ganti-di-produksi";
 
+/** Kunci penandatangan sesi. Spasi di tepi diabaikan; NEXTAUTH_SECRET diterima sebagai alternatif. */
+export function authSecretValue() {
+  return (process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "").trim();
+}
+
 function secret() {
-  const s = process.env.AUTH_SECRET;
+  const s = authSecretValue();
   // Di Vercel/produksi jangan pernah memakai kunci bawaan yang tertulis di kode publik
   if (!s && (process.env.VERCEL || process.env.NODE_ENV === "production" && process.env.DATABASE_URL)) {
     throw new Error("AUTH_SECRET belum diisi. Tambahkan di Environment Variables.");
