@@ -60,19 +60,19 @@ export function WeatherWidget() {
 
   if (failed) return null;
 
-  const shell = "w-[9.5rem] overflow-hidden rounded-2xl border border-white/20 bg-primary-950/40 text-white shadow-2xl backdrop-blur-md sm:w-60";
+  const shell = "w-[9.5rem] overflow-hidden rounded-2xl border border-white/20 bg-primary-950/40 text-white shadow-2xl backdrop-blur-md sm:w-60 lg:w-44";
 
   if (!data) {
     return (
-      <div className={cn(shell, "p-3 sm:p-4")} aria-label="Memuat cuaca">
+      <div className={cn(shell, "p-3 sm:p-4 lg:p-3")} aria-label="Memuat cuaca">
         <div className="flex items-center gap-3">
-          <div className="skeleton-light h-9 w-9 shrink-0 rounded-full sm:h-12 sm:w-12" />
+          <div className="skeleton-light h-9 w-9 shrink-0 rounded-full sm:h-12 sm:w-12 lg:h-9 lg:w-9" />
           <div className="flex-1 space-y-2">
             <div className="skeleton-light h-4 w-12 rounded sm:h-6 sm:w-16" />
             <div className="skeleton-light h-2.5 w-16 rounded sm:w-24" />
           </div>
         </div>
-        <div className="skeleton-light mt-3 hidden h-2.5 w-full rounded sm:block" />
+        <div className="skeleton-light mt-3 hidden h-2.5 w-full rounded sm:block lg:hidden" />
       </div>
     );
   }
@@ -83,19 +83,19 @@ export function WeatherWidget() {
 
   return (
     <div className={shell} role="region" aria-label={`Cuaca dan kualitas udara ${data.lokasi}`} aria-live="polite">
-      <div className="flex items-center gap-1 border-b border-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white/70 sm:px-4 sm:text-[11px]">
+      <div className="flex items-center gap-1 border-b border-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white/70 sm:px-4 sm:text-[11px] lg:px-3 lg:text-[10px]">
         <MapPin className="h-3 w-3 shrink-0 text-accent-400" />
         <span className="truncate">{data.lokasi}</span>
       </div>
 
-      <div className="relative h-[3.75rem] sm:h-[5.5rem]">
+      <div className="relative h-[3.75rem] sm:h-[5.5rem] lg:h-[3.75rem]">
         {data.cuaca && w && (
-          <div className={cn("absolute inset-0 flex items-center gap-3 px-3 transition-all duration-700 sm:px-4", active === "cuaca" ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0")}>
-            <w.Icon className="h-9 w-9 shrink-0 text-accent-400 sm:h-12 sm:w-12" strokeWidth={1.5} />
+          <div className={cn("absolute inset-0 flex items-center gap-3 px-3 transition-all duration-700 sm:px-4 lg:px-3", active === "cuaca" ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0")}>
+            <w.Icon className="h-9 w-9 shrink-0 text-accent-400 sm:h-12 sm:w-12 lg:h-9 lg:w-9" strokeWidth={1.5} />
             <div className="min-w-0">
-              <p className="font-display text-2xl font-extrabold leading-none sm:text-3xl">{data.cuaca.suhu}°C</p>
-              <p className="mt-1 truncate text-[11px] font-medium text-white/85 sm:text-sm">{w.label}</p>
-              <p className="mt-0.5 hidden items-center gap-2.5 text-[11px] text-white/60 sm:flex">
+              <p className="font-display text-2xl font-extrabold leading-none sm:text-3xl lg:text-2xl">{data.cuaca.suhu}°C</p>
+              <p className="mt-1 truncate text-[11px] font-medium text-white/85 sm:text-sm lg:text-xs">{w.label}</p>
+              <p className="mt-0.5 hidden items-center gap-2.5 text-[11px] text-white/60 sm:flex lg:hidden">
                 <span className="flex items-center gap-0.5"><Droplets className="h-3 w-3" />{data.cuaca.kelembapan}%</span>
                 <span className="flex items-center gap-0.5"><Wind className="h-3 w-3" />{data.cuaca.angin} km/j</span>
               </p>
@@ -103,14 +103,14 @@ export function WeatherWidget() {
           </div>
         )}
         {data.udara && q && (
-          <div className={cn("absolute inset-0 flex items-center gap-3 px-3 transition-all duration-700 sm:px-4", active === "udara" ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0")}>
-            <span className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-display text-sm font-extrabold text-white shadow-lg ring-2 ring-white/30 sm:h-12 sm:w-12 sm:text-base", q.color)}>
+          <div className={cn("absolute inset-0 flex items-center gap-3 px-3 transition-all duration-700 sm:px-4 lg:px-3", active === "udara" ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0")}>
+            <span className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-display text-sm font-extrabold text-white shadow-lg ring-2 ring-white/30 sm:h-12 sm:w-12 sm:text-base lg:h-9 lg:w-9 lg:text-sm", q.color)}>
               {data.udara.aqi}
             </span>
             <div className="min-w-0">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-white/60 sm:text-[11px]">Kualitas Udara</p>
-              <p className={cn("truncate text-xs font-bold sm:text-sm", q.text)}>{q.label}</p>
-              <p className="mt-0.5 hidden text-[11px] text-white/60 sm:block">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-white/60 sm:text-[11px] lg:text-[10px]">Kualitas Udara</p>
+              <p className={cn("truncate text-xs font-bold sm:text-sm lg:text-xs", q.text)}>{q.label}</p>
+              <p className="mt-0.5 hidden text-[11px] text-white/60 sm:block lg:hidden">
                 PM2.5 {data.udara.pm25} · PM10 {data.udara.pm10} µg/m³
               </p>
             </div>
@@ -119,7 +119,7 @@ export function WeatherWidget() {
       </div>
 
       {slides.length > 1 && (
-        <div className="flex gap-1 px-3 pb-2 sm:px-4">
+        <div className="flex gap-1 px-3 pb-2 sm:px-4 lg:px-3">
           {slides.map((s, i) => (
             <button
               key={String(s)}
