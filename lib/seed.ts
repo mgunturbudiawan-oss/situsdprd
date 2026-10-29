@@ -5,8 +5,8 @@ import { slugify } from "./utils";
 export const DEFAULT_SETTINGS: Settings = {
   namaDaerah: "Kota Ternate",
   tagline: "Bersama Rakyat Membangun Kota Ternate",
-  logo: "",
-  favicon: "",
+  logo: "/images/lambang-kota-ternate.png",
+  favicon: "/images/lambang-kota-ternate.png",
   warnaPrimer: "#0b5ea8",
   warnaAksen: "#f2b705",
   periode: "2024–2029",

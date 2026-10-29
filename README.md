@@ -115,5 +115,6 @@ storage/             data lokal (diabaikan git)
   Lisensi CC mewajibkan atribusi. Karena itu kredit foto tampil di pojok hero (kolom *Kredit Foto* pada menu Hero Slider). Sebaiknya ganti dengan foto gedung dan kegiatan DPRD Kota Ternate sendiri.
 - Gambar berita dan galeri contoh memakai picsum.photos, dan video contoh memakai stream uji publik (Mux/Google). Ganti semuanya dari CMS.
 - **Widget cuaca & kualitas udara** mengambil data dari [Open-Meteo](https://open-meteo.com), yang gratis dan tanpa API key, dengan cache 10 menit. Atur lokasi di *Pengaturan Situs → Widget Cuaca*. Indeks udara memakai skala AQI (US) dengan label kategori seperti ISPU.
+- **Logo & favicon** memakai Lambang Kota Ternate (`public/images/lambang-kota-ternate.png`, Wikimedia Commons, Public Domain; lambang daerah tidak dilindungi hak cipta menurut UU 28/2014 Pasal 42). Bisa diganti di *Pengaturan Situs → Logo*.
 - **Zona waktu** situs adalah **WIT (UTC+9)**, sesuai Kota Ternate. Konstanta `TIMEZONE` dan `ZONA_WAKTU` ada di `lib/utils.ts`.
 - **Data wilayah** (penduduk, luas, kecamatan, kelurahan) diatur di *Pengaturan Situs → Data Wilayah*. Periksa kembali angkanya dengan data resmi BPS/Pemkot sebelum dipublikasikan.
