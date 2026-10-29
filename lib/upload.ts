@@ -31,9 +31,31 @@ export const MAX_UPLOAD_MB = process.env.VERCEL ? 4 : 25;
 
 export const usingBlob = () => !!process.env.BLOB_READ_WRITE_TOKEN;
 
+/** Akses store Blob: BLOB_ACCESS=public|private, atau dideteksi otomatis saat unggahan pertama. */
+let blobAccess: "public" | "private" | undefined =
+  process.env.BLOB_ACCESS === "private" || process.env.BLOB_ACCESS === "public" ? process.env.BLOB_ACCESS : undefined;
+
+async function putBlob(pathname: string, file: File, contentType: string) {
+  const opts = { contentType, addRandomSuffix: false };
+  if (blobAccess !== "private") {
+    try {
+      const blob = await put(pathname, file, { ...opts, access: "public" });
+      blobAccess = "public";
+      return blob.url;
+    } catch (e) {
+      if (blobAccess === "public") throw e;
+    }
+  }
+  // Store private: file dilayani lewat route /uploads/... yang membacanya dengan token.
+  await put(pathname, file, { ...opts, access: "private" });
+  blobAccess = "private";
+  return "/" + pathname;
+}
+
 /**
- * Simpan file unggahan dan kembalikan URL publiknya.
+ * Simpan file unggahan dan kembalikan URL-nya.
  * - Vercel Blob bila BLOB_READ_WRITE_TOKEN diisi (wajib di Vercel, karena disk serverless tidak permanen).
+ *   Store public → URL blob langsung; store private → /uploads/... (diproksikan oleh route).
  * - Folder storage/uploads/YYYY/MM bila tidak (dilayani oleh route /uploads/...).
  */
 export async function saveUpload(file: File, kind: "image" | "file" = "file") {
@@ -48,8 +70,7 @@ export async function saveUpload(file: File, kind: "image" | "file" = "file") {
   const name = `${base}-${randomBytes(4).toString("hex")}.${ext}`;
 
   if (usingBlob()) {
-    const blob = await put(`uploads/${sub}/${name}`, file, { access: "public", contentType: MIME[ext], addRandomSuffix: false });
-    return blob.url;
+    return putBlob(`uploads/${sub}/${name}`, file, MIME[ext]);
   }
 
   if (process.env.VERCEL) {
