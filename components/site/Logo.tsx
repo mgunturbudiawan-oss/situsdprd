@@ -13,14 +13,14 @@ export function Emblem({ src, className }: { src?: string; className?: string })
   );
 }
 
-export function Logo({ namaDaerah, logo, light, compact }: { namaDaerah: string; logo?: string; light?: boolean; compact?: boolean }) {
+export function Logo({ namaDaerah, logo, light, compact, tagline = true }: { namaDaerah: string; logo?: string; light?: boolean; compact?: boolean; tagline?: boolean }) {
   return (
     <span className="flex min-w-0 items-center gap-2.5 sm:gap-3">
       <Emblem src={logo} className={cn("shrink-0", compact ? "h-10 w-10" : "h-10 w-10 lg:h-12 lg:w-12")} />
       <span className="min-w-0 leading-tight">
         <span className={cn("block font-display font-extrabold tracking-wide", compact ? "text-lg" : "text-lg lg:text-xl", light ? "text-white" : "text-primary-800")}>
           DPRD
-          {!compact && <span className={cn("ml-2 hidden text-[10px] font-semibold uppercase tracking-[0.18em] xl:inline", light ? "text-accent-400" : "text-accent-600")}>Dewan Perwakilan Rakyat Daerah</span>}
+          {!compact && tagline && <span className={cn("ml-2 hidden text-[10px] font-semibold uppercase tracking-[0.18em] xl:inline", light ? "text-accent-400" : "text-accent-600")}>Dewan Perwakilan Rakyat Daerah</span>}
         </span>
         <span className={cn("block truncate text-[11px] font-semibold uppercase tracking-wider sm:text-xs", light ? "text-white/80" : "text-slate-600")}>{namaDaerah}</span>
       </span>
