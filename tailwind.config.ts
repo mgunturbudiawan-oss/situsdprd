@@ -8,7 +8,7 @@ const scale = (name: string) =>
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
   theme: {
-    container: { center: true, padding: "1rem", screens: { "2xl": "1280px" } },
+    container: { center: true, padding: "1rem", screens: { lg: "980px" } },
     extend: {
       colors: { primary: scale("primary"), accent: scale("accent") },
       fontFamily: {

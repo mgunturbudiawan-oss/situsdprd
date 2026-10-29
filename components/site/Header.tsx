@@ -163,7 +163,7 @@ export function Header({ namaDaerah, logo, telepon, email, today, social, live }
       <header className={cn("fixed inset-x-0 top-0 z-50 transition-shadow duration-300", scrolled && "shadow-lg")} onMouseLeave={scheduleClose}>
         {/* Bar info (desktop) */}
         <div className={cn("hidden overflow-hidden bg-primary-900 text-xs text-white/75 transition-all duration-300 lg:block", scrolled ? "max-h-0" : "max-h-10")}>
-          <div className="container flex h-9 items-center justify-between lg:max-w-[980px]">
+          <div className="container flex h-9 items-center justify-between">
             <div className="flex items-center gap-5">
               <span className="flex items-center gap-1.5 font-semibold text-white">
                 <CalendarDays className="h-3.5 w-3.5 text-accent-400" /> {today}
@@ -190,7 +190,7 @@ export function Header({ namaDaerah, logo, telepon, email, today, social, live }
 
         {/* Bar utama */}
         <div className="border-b border-white/10 bg-primary-800 lg:border-b-2 lg:border-accent-500">
-          <div className="container flex h-16 items-center gap-4 lg:h-20 lg:max-w-[980px]">
+          <div className="container flex h-16 items-center gap-4 lg:h-20">
             <Link href="/" aria-label="Beranda" className="min-w-0 shrink">
               <Logo namaDaerah={namaDaerah} logo={logo} light tagline={false} />
             </Link>
@@ -275,7 +275,7 @@ export function Header({ namaDaerah, logo, telepon, email, today, social, live }
         {/* Mega menu (desktop) */}
         {current && (
           <div className="absolute inset-x-0 top-full hidden lg:block" onMouseEnter={() => openMega(current.label)}>
-            <div className="container pt-2 lg:max-w-[980px]">
+            <div className="container pt-2">
               <div className="grid grid-cols-12 overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-black/5">
                 <div className="pattern-kawung col-span-4 flex flex-col bg-gradient-to-br from-primary-800 to-primary-950 p-8 text-white">
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent-400">Menu</span>
