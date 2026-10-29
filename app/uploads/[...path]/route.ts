@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { get } from "@vercel/blob";
-import { MIME, UPLOAD_DIR, usingBlob } from "@/lib/upload";
+import { MIME, UPLOAD_DIR, blobCredentials } from "@/lib/upload";
 
 const headersFor = (ext: string) => ({
   "Content-Type": MIME[ext] || "application/octet-stream",
@@ -14,8 +14,9 @@ export async function GET(_req: Request, { params }: { params: Promise<{ path: s
   const ext = path.extname(parts[parts.length - 1] || "").slice(1).toLowerCase();
 
   // Store Vercel Blob private: baca dengan token lalu teruskan ke pengunjung.
-  if (usingBlob() && !parts.some((p) => p === ".." || p === "." || p.includes("\\"))) {
-    const res = await get(`uploads/${parts.join("/")}`, { access: "private" }).catch(() => null);
+  const creds = blobCredentials();
+  if (creds && !parts.some((p) => p === ".." || p === "." || p.includes("\\"))) {
+    const res = await get(`uploads/${parts.join("/")}`, { ...creds.options, access: "private" }).catch(() => null);
     if (res?.statusCode === 200) return new Response(res.stream, { headers: headersFor(ext) });
   }
 

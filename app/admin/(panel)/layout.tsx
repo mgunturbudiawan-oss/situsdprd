@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AlertTriangle, LogOut, UserCircle } from "lucide-react";
 import { requireUser } from "@/lib/auth";
 import { readDB, readOnlyFallback } from "@/lib/db";
+import { usingBlob } from "@/lib/upload";
 import { RESOURCES } from "@/lib/resources";
 import { Sidebar, type NavGroup } from "@/components/admin/Sidebar";
 import { logout } from "../actions";
@@ -53,7 +54,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
               </div>
             </div>
           )}
-          {process.env.VERCEL && !process.env.BLOB_READ_WRITE_TOKEN && (
+          {process.env.VERCEL && !usingBlob() && (
             <div className="mb-6 flex gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
               <AlertTriangle className="h-5 w-5 shrink-0" />
               <p>

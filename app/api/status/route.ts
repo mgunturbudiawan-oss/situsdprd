@@ -1,5 +1,6 @@
 import { authSecretValue } from "@/lib/auth";
 import { readDB, usingPostgres } from "@/lib/db";
+import { blobCredentials } from "@/lib/upload";
 
 /**
  * Diagnosis konfigurasi deployment. Hanya menampilkan ada/tidaknya variabel (tanpa nilai rahasia),
@@ -23,7 +24,8 @@ export async function GET() {
       variabel: {
         AUTH_SECRET: authSecretValue() ? "terisi" : "BELUM TERBACA",
         DATABASE_URL: process.env.DATABASE_URL ? "terisi" : "BELUM TERBACA",
-        BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN ? "terisi" : "belum (unggah file tidak aktif)",
+        BLOB: blobCredentials()?.via ?? "BELUM TERHUBUNG (unggah file tidak aktif)",
+        variabelTerkaitBlob: Object.keys(process.env).filter((k) => /BLOB|STORE_ID|READ_WRITE_TOKEN/.test(k)),
       },
       database,
     },
