@@ -52,6 +52,9 @@ export async function saveUpload(file: File, kind: "image" | "file" = "file") {
     return blob.url;
   }
 
+  if (process.env.VERCEL) {
+    throw new Error("Penyimpanan file belum terhubung. Hubungkan Vercel Blob (Storage → Blob) agar BLOB_READ_WRITE_TOKEN terisi, lalu redeploy.");
+  }
   const dir = path.join(UPLOAD_DIR, ...sub.split("/"));
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, name), Buffer.from(await file.arrayBuffer()));

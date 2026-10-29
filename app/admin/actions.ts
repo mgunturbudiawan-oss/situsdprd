@@ -13,6 +13,16 @@ import { slugify } from "@/lib/utils";
 
 export type FormState = { error?: string; success?: string } | null;
 
+/** Jalankan operasi tulis; kembalikan pesan error (atau null bila berhasil). */
+async function attempt(fn: () => Promise<unknown>): Promise<string | null> {
+  try {
+    await fn();
+    return null;
+  } catch (e) {
+    return (e as Error).message;
+  }
+}
+
 /* ---------- Autentikasi ---------- */
 
 const attempts = new Map<string, { count: number; until: number }>();
@@ -31,7 +41,11 @@ export async function login(_prev: FormState, fd: FormData): Promise<FormState> 
     return { error: "Username atau password salah." };
   }
   attempts.delete(username);
-  await createSession(user.id);
+  try {
+    await createSession(user.id);
+  } catch (e) {
+    return { error: (e as Error).message };
+  }
   redirect("/admin");
 }
 
@@ -133,7 +147,8 @@ export async function deleteResource(key: string, id: string) {
       redirect(`/admin/users?error=${encodeURIComponent("Minimal harus ada satu admin")}`);
     }
   }
-  await remove(res.key, id);
+  const err = await attempt(() => remove(res.key, id));
+  if (err) redirect(`/admin/${res.key}?error=${encodeURIComponent(err)}`);
   revalidatePath("/", "layout");
   redirect(`/admin/${res.key}?deleted=1`);
 }
@@ -155,7 +170,8 @@ export async function saveSettings(group: "umum" | "tv", _prev: FormState, fd: F
 export async function toggleLive() {
   await requireUser();
   const current = (await readDB()).settings.tvLiveAktif;
-  await updateSettings({ tvLiveAktif: !current });
+  const err = await attempt(() => updateSettings({ tvLiveAktif: !current }));
+  if (err) redirect(`/admin?error=${encodeURIComponent(err)}`);
   revalidatePath("/", "layout");
 }
 
@@ -165,19 +181,21 @@ export async function updateAspirasi(id: string, _prev: FormState, fd: FormData)
   await requireUser();
   if (!await findById("aspirasi", id)) return { error: "Aspirasi tidak ditemukan" };
   const status = String(fd.get("status") || "");
-  await upsert("aspirasi", id, {
+  const err = await attempt(() => upsert("aspirasi", id, {
     status: STATUS_ASPIRASI.includes(status) ? status : "Baru",
     komisiId: String(fd.get("komisiId") || ""),
     tanggapan: String(fd.get("tanggapan") || "").trim(),
     tampilPublik: fd.get("tampilPublik") === "on",
-  });
+  }));
+  if (err) return { error: err };
   revalidatePath("/", "layout");
   return { success: "Aspirasi berhasil diperbarui." };
 }
 
 export async function deleteAspirasi(id: string) {
   await requireUser();
-  await remove("aspirasi" as CollectionName, id);
+  const err = await attempt(() => remove("aspirasi" as CollectionName, id));
+  if (err) redirect(`/admin/aspirasi?error=${encodeURIComponent(err)}`);
   revalidatePath("/", "layout");
   redirect("/admin/aspirasi?deleted=1");
 }
@@ -191,6 +209,7 @@ export async function changePassword(_prev: FormState, fd: FormData): Promise<Fo
   if (!verifyPassword(current, me.passwordHash)) return { error: "Password saat ini salah" };
   if (next.length < 6) return { error: "Password baru minimal 6 karakter" };
   if (next !== fd.get("confirm")) return { error: "Konfirmasi password tidak cocok" };
-  await upsert("users", me.id, { passwordHash: hashPassword(next) });
+  const err = await attempt(() => upsert("users", me.id, { passwordHash: hashPassword(next) }));
+  if (err) return { error: err };
   return { success: "Password berhasil diubah." };
 }

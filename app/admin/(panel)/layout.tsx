@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { LogOut, UserCircle } from "lucide-react";
+import { AlertTriangle, LogOut, UserCircle } from "lucide-react";
 import { requireUser } from "@/lib/auth";
-import { readDB } from "@/lib/db";
+import { readDB, readOnlyFallback } from "@/lib/db";
 import { RESOURCES } from "@/lib/resources";
 import { Sidebar, type NavGroup } from "@/components/admin/Sidebar";
 import { logout } from "../actions";
@@ -41,7 +41,28 @@ export default async function PanelLayout({ children }: { children: React.ReactN
             </button>
           </form>
         </header>
-        <main className="px-4 py-8 md:px-8">{children}</main>
+        <main className="px-4 py-8 md:px-8">
+          {readOnlyFallback() && (
+            <div className="mb-6 flex gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+              <AlertTriangle className="h-5 w-5 shrink-0" />
+              <div>
+                <p className="font-semibold">Database belum terhubung — perubahan tidak dapat disimpan.</p>
+                <p className="mt-0.5">
+                  Di Vercel buka <b>Storage → Create Database → Neon</b>, hubungkan ke project ini (DATABASE_URL terisi otomatis), lalu <b>Redeploy</b>. Situs sementara menampilkan data contoh.
+                </p>
+              </div>
+            </div>
+          )}
+          {process.env.VERCEL && !process.env.BLOB_READ_WRITE_TOKEN && (
+            <div className="mb-6 flex gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+              <AlertTriangle className="h-5 w-5 shrink-0" />
+              <p>
+                <b>Penyimpanan file belum terhubung</b> — unggah gambar/dokumen belum bisa dipakai. Buka <b>Storage → Create → Blob</b>, hubungkan ke project, lalu <b>Redeploy</b>.
+              </p>
+            </div>
+          )}
+          {children}
+        </main>
       </div>
     </div>
   );

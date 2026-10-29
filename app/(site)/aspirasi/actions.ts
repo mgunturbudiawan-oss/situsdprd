@@ -54,7 +54,12 @@ export async function submitAspirasi(_prev: AspirasiState, formData: FormData): 
   }
 
   const kode = makeKode();
-  await upsert("aspirasi", null, { ...data, kode, lampiran, status: "Baru", tanggapan: "", tampilPublik: false });
+  try {
+    await upsert("aspirasi", null, { ...data, kode, lampiran, status: "Baru", tanggapan: "", tampilPublik: false });
+  } catch (e) {
+    console.error("Gagal menyimpan aspirasi:", e);
+    return { ok: false, error: "Maaf, aspirasi belum dapat disimpan saat ini. Silakan coba lagi nanti." };
+  }
   revalidatePath("/admin");
   return { ok: true, kode };
 }

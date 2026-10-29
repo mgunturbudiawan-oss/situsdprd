@@ -33,6 +33,22 @@ function normalize(raw: Partial<DB>): DB {
 
 let fileCache: { mtime: number; data: DB } | null = null;
 
+/**
+ * Di lingkungan serverless (mis. Vercel) disk bersifat read-only. Tanpa DATABASE_URL situs tetap
+ * ditampilkan memakai data contoh di memori, tetapi perubahan dari CMS tidak bisa disimpan.
+ */
+const memory = globalThis as unknown as { __dprdMemoryDB?: DB };
+export const readOnlyFallback = () => !process.env.DATABASE_URL && !!process.env.VERCEL;
+
+export class DatabaseNotConnectedError extends Error {
+  constructor() {
+    super(
+      "Database belum terhubung. Hubungkan PostgreSQL (Vercel → Storage → Neon) agar DATABASE_URL terisi, lalu redeploy. " +
+        "Sampai saat itu situs menampilkan data contoh dan perubahan tidak bisa disimpan.",
+    );
+  }
+}
+
 function fileWrite(db: DB) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
   const tmp = DB_FILE + "." + process.pid + ".tmp";
@@ -42,6 +58,10 @@ function fileWrite(db: DB) {
 }
 
 function fileLoad(fresh = false): DB {
+  if (readOnlyFallback()) {
+    memory.__dprdMemoryDB ??= createSeed();
+    return fresh ? structuredClone(memory.__dprdMemoryDB) : memory.__dprdMemoryDB;
+  }
   if (!fs.existsSync(DB_FILE)) fileWrite(createSeed());
   const mtime = fs.statSync(DB_FILE).mtimeMs;
   if (!fresh && fileCache && fileCache.mtime === mtime) return fileCache.data;
@@ -135,6 +155,7 @@ export const readDB = cache(async (): Promise<DB> => (usingPostgres() ? pgLoad()
 /** Ubah database secara atomik (transaksi di Postgres, tulis-ganti file di driver JSON). */
 export async function mutate<T>(fn: (db: DB) => T): Promise<T> {
   if (usingPostgres()) return pgMutate(fn);
+  if (readOnlyFallback()) throw new DatabaseNotConnectedError();
   const db = fileLoad(true);
   const result = fn(db);
   fileWrite(db);
