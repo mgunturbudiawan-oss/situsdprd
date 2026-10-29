@@ -53,6 +53,12 @@ npm run db:import -- --force  # menimpa data di database tujuan
 
 Skrip ini mengunggah file di `storage/uploads/` ke Vercel Blob, mengganti URL-nya di data, lalu menulis semuanya ke tabel `dprd_store`.
 
+### Mengecek koneksi database
+
+```bash
+npm run db:check   # tes koneksi DATABASE_URL & tampilkan isi tabel dprd_store
+```
+
 ### Batasan di Vercel
 
 - Ukuran unggahan maksimal **4 MB per file**, karena Vercel membatasi body request sekitar 4,5 MB. Di server sendiri (VPS) batasnya 25 MB.

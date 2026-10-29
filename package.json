@@ -11,7 +11,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "db:import": "node --env-file-if-exists=.env.local --env-file-if-exists=.env scripts/db-import.mjs",
-    "reset-data": "node -e \"require('fs').rmSync('storage/db.json',{force:true});console.log('Data direset, seed akan dibuat ulang saat situs diakses.')\""
+    "reset-data": "node -e \"require('fs').rmSync('storage/db.json',{force:true});console.log('Data direset, seed akan dibuat ulang saat situs diakses.')\"",
+    "db:check": "node --env-file-if-exists=.env.local --env-file-if-exists=.env scripts/db-check.mjs"
   },
   "dependencies": {
     "@tiptap/extension-highlight": "^2.27.3",
